@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <assert.h>
 using namespace std;
 
 // Returns the product of two positive integers, m and n,
@@ -41,13 +42,10 @@ int countDigit(int num, int digit)
 //
 string pairPlus(string n)
 {
-	/*if (n.size() <= 0) return n;
-	if (n[n.size() - 1] == pairPlus(n)[1]) return n + "++" + pairPlus(n.substr(n.size() - 1));
-	return pairPlus(n.resize(n.size()-1));*/
-
-	return n;
-	
-
+    string s = "++"; //It's so strange that the compiler does not count n[0] as a string. So I make "++" to a string
+	if (n.size() == 1) return n;
+    if (n[0] ==pairPlus(n.substr(1))[0]) return n[0] + s + pairPlus(n.substr(1));
+    return n[0] + pairPlus(n.substr(1));
 }
 
 // str contains a single pair of parenthesis, return a new string
@@ -65,7 +63,7 @@ string subParen(string str)
 		return ;
 	}
 	return str.erase(str.end() - 1);*/
-
+    return " ";
 
 
 
@@ -82,7 +80,7 @@ string subParen(string str)
 //
 bool sumCombination(const int a[], int size, int target)
 {
-	if (size <= 0 && a[0] == target)	return true;
+	/*if (size <= 0 && a[0] == target)*/	return true;
 
 }
 
@@ -91,7 +89,10 @@ int main() {
 
 	
 
-	cout << pairPlus("goodbye") << endl;
+    assert(pairPlus("goodbye")=="go++odbye");
+    assert(pairPlus("yyuu")=="y++yu++u");
+    assert(pairPlus("aaaa")=="a++a++a++a");
+    cout << "[!] Tests passed!" << endl;
 
 
 }
