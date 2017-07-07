@@ -6,7 +6,8 @@ using namespace std;
 // using only repeated addition.
 int mult(unsigned int m, unsigned int n)
 {
-	return -1;  // This is incorrect.
+	if (n == 1) return m;
+	return m + mult(m, n - 1);
 }
 
 // Returns the number of occurrences of digit in the decimal
@@ -20,7 +21,14 @@ int mult(unsigned int m, unsigned int n)
 //
 int countDigit(int num, int digit)
 {
-	return -1;  // This is incorrect.
+
+	if (num / 10 == 0 && num != digit)   return 0;
+
+	if (num / 10 == 0 && num == digit)   return 1;
+
+	if (num % 10 == digit)               return 1 + countDigit(num / 10, digit);
+	else							     return countDigit(num / 10, digit);
+
 }
 
 // Returns a string where the same characters next each other in
@@ -33,7 +41,13 @@ int countDigit(int num, int digit)
 //
 string pairPlus(string n)
 {
-	return "";  // This is not always correct.
+	/*if (n.size() <= 0) return n;
+	if (n[n.size() - 1] == pairPlus(n)[1]) return n + "++" + pairPlus(n.substr(n.size() - 1));
+	return pairPlus(n.resize(n.size()-1));*/
+
+	return n;
+	
+
 }
 
 // str contains a single pair of parenthesis, return a new string
@@ -47,7 +61,14 @@ string pairPlus(string n)
 //
 string subParen(string str)
 {
-	return "*";  // This is incorrect.
+	/*if (str[str.size() - 1] == ')') {
+		return ;
+	}
+	return str.erase(str.end() - 1);*/
+
+
+
+
 }
 
 // Return true if the sum of any combination of elements in the array
@@ -61,13 +82,16 @@ string subParen(string str)
 //
 bool sumCombination(const int a[], int size, int target)
 {
-	return false;  // This is not always correct.
+	if (size <= 0 && a[0] == target)	return true;
+
 }
 
 
 int main() {
 
+	
 
+	cout << pairPlus("goodbye") << endl;
 
 
 }
