@@ -82,16 +82,23 @@ string subParen(string str)
 //
 bool sumCombination(const int a[], int size, int target)
 {
-	/*if (size <= 0 && a[0] == target)*/	return true;
+    if (size==2 && a[0] + a[1] == target) return true;
+    else if (size == 2) return false;
+    else if (a[0] + a[1] == target) return true;
+    else if (a[0] + a[size-1] == target) return true;
+    else return sumCombination(a+1, size-1, target);
+    
 
 }
 
 
 int main() {
 
-	
+    int a[3] = {2,4,8};
+    cout << sumCombination(a, 3, 12) <<endl;
 
     
-    cout << subParen("4agh(y)") << endl;
+    
+    
 
 }
