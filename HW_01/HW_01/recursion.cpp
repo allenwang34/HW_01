@@ -59,13 +59,15 @@ string pairPlus(string n)
 //
 string subParen(string str)
 {
-	/*if (str[str.size() - 1] == ')') {
-		return ;
-	}
-	return str.erase(str.end() - 1);*/
-    return " ";
-
-
+    if (str[0] == '(' && str[str.length()-1] == ')') return str;
+    
+    //if (str[0] != '(' && str[0] != ')') return subParen(str.substr(1,str.length()-2));
+    
+    if (str[0] == '(') return subParen(str.substr(0,str.length()-1));
+    
+    else if (str[str.length()-1] == ')') return subParen(str.substr(1));
+    
+    else return subParen(str.substr(1,str.length()-2));
 
 }
 
@@ -89,10 +91,7 @@ int main() {
 
 	
 
-    assert(pairPlus("goodbye")=="go++odbye");
-    assert(pairPlus("yyuu")=="y++yu++u");
-    assert(pairPlus("aaaa")=="a++a++a++a");
-    cout << "[!] Tests passed!" << endl;
-
+    
+    cout << subParen("4agh(y)") << endl;
 
 }
