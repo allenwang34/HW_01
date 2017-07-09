@@ -81,8 +81,9 @@ string subParen(string str)
 //     sumCombination([], 0, 0)         => true
 //
 bool sumCombination(const int a[], int size, int target)
-{
-    if (size==2 && a[0] + a[1] == target) return true;
+{	
+	if (a[0] == target) return true;
+    else if (size==2 && a[0] + a[1] == target) return true;
     else if (size == 2) return false;
     else if (a[0] + a[1] == target) return true;
     else if (a[0] + a[size-1] == target) return true;
@@ -94,8 +95,8 @@ bool sumCombination(const int a[], int size, int target)
 
 int main() {
 
-    int a[3] = {2,4,8};
-    cout << sumCombination(a, 3, 12) <<endl;
+    int a[3] = {11,9,2};
+    cout << sumCombination(a, 3, 2) <<endl;
 
     
     
