@@ -93,13 +93,69 @@ bool sumCombination(const int a[], int size, int target)
 }
 
 
-int main() {
 
-    int a[3] = {11,9,2};
-    cout << sumCombination(a, 3, 2) <<endl;
+/*If the start location is equal to the ending location, then we've
+solved the maze, so return true.
+Mark the start location as visted.
+For each of the four directions,
+    If the location one step in that direction (from the start
+        location) is unvisited,
+            then call pathExists starting from that location (and
+                        ending at the same ending location as in the
+                        current call).
+                If that returned true,
+                    then return true.
+Return false.*/
 
-    
-    
-    
 
+
+
+
+bool pathExists(string maze[], int nRows, int nCols, int sr, int sc, int er, int ec) {
+    if ( sr == er && sc == ec) {
+        return true;
+    }
+   
+    maze[sr][sc] = 'Y';
+    
+    if (maze[sr+1][sc] == '.' && sr+1 <= nRows) {
+        pathExists(maze, nRows, nCols, sr+1, sc, er, ec);
+    }
+    if (maze[sr-1][sc] == '.' && sr-1 >= 0) {
+        pathExists(maze, nRows, nCols, sr-1, sc, er, ec);
+    }
+    if (maze[sr][sc+1] == '.' && sc+1 <= nCols) {
+        pathExists(maze, nRows, nCols, sr, sc+1, er, ec);
+    }
+    if (maze[sr][sc-1] == '.' && sc-1 >=0) {
+        pathExists(maze, nRows, nCols, sr, sc-1, er, ec);
+    }
+    
+    return false;
+    
+}
+
+
+
+
+
+int main()
+{
+    string maze[10] = {
+        "XXXXXXXXXX",
+        "X.......@X",
+        "XX@X@@.XXX",
+        "X..X.X...X",
+        "X..X...@.X",
+        "X....XXX.X",
+        "X@X....XXX",
+        "X..XX.XX.X",
+        "X...X....X",
+        "XXXXXXXXXX"
+    };
+    
+    if (pathExists(maze, 10,10, 6,4, 1,1))
+        cout << "Solvable!" << endl;
+    else
+        cout << "Out of luck!" << endl;
 }
