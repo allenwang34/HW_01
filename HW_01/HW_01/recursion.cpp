@@ -81,15 +81,17 @@ string subParen(string str)
 //     sumCombination([], 0, 0)         => true
 //
 bool sumCombination(const int a[], int size, int target)
-{	
-	if (a[0] == target) return true;
-    else if (size==2 && a[0] + a[1] == target) return true;
-    else if (size == 2) return false;
-    else if (a[0] + a[1] == target) return true;
-    else if (a[0] + a[size-1] == target) return true;
-    else return sumCombination(a+1, size-1, target);
+{
+    int n = a[0];
+    //if (target == 0)
+        //return true;
+    if (n == target)
+        return true;
+    if (size == 1 && n != target)
+        return false;
+    return (sumCombination(a++,size-1,target) || sumCombination(a++, size-1, target - n));
+        //return true;
     
-
 }
 
 
@@ -118,19 +120,20 @@ bool pathExists(string maze[], int nRows, int nCols, int sr, int sc, int er, int
    
     maze[sr][sc] = 'Y';
     
-    if (maze[sr+1][sc] == '.' && sr+1 <= nRows) {
-        pathExists(maze, nRows, nCols, sr+1, sc, er, ec);
+    if (maze[sr+1][sc] == '.' && sr+1 <= nRows && pathExists(maze, nRows, nCols, sr+1, sc, er, ec)) {
+        return true;//pathExists(maze, nRows, nCols, sr+1, sc, er, ec);
     }
-    if (maze[sr-1][sc] == '.' && sr-1 >= 0) {
-        pathExists(maze, nRows, nCols, sr-1, sc, er, ec);
+    if (maze[sr-1][sc] == '.' && sr-1 >= 0 && pathExists(maze, nRows, nCols, sr-1, sc, er, ec)) {
+        return true;//pathExists(maze, nRows, nCols, sr-1, sc, er, ec);
     }
-    if (maze[sr][sc+1] == '.' && sc+1 <= nCols) {
-        pathExists(maze, nRows, nCols, sr, sc+1, er, ec);
+    if (maze[sr][sc+1] == '.' && sc+1 <= nCols && pathExists(maze, nRows, nCols, sr, sc+1, er, ec)) {
+        return true;//pathExists(maze, nRows, nCols, sr, sc+1, er, ec);
     }
-    if (maze[sr][sc-1] == '.' && sc-1 >=0) {
-        pathExists(maze, nRows, nCols, sr, sc-1, er, ec);
+    if (maze[sr][sc-1] == '.' && sc-1 >=0 && pathExists(maze, nRows, nCols, sr, sc-1, er, ec)) {
+        return true; //pathExists(maze, nRows, nCols, sr, sc-1, er, ec);
     }
-    
+    else
+        maze[sr][sc] = '.';
     return false;
     
 }
@@ -138,8 +141,25 @@ bool pathExists(string maze[], int nRows, int nCols, int sr, int sc, int er, int
 
 
 
+int main() {
+    
+    int a[] = {2,8,6,4};
+    
+    cout << sumCombination(a,4,12) << endl;
+    
+    
+    
+}
 
-int main()
+
+
+
+
+
+
+
+
+/*int main()
 {
     string maze[10] = {
         "XXXXXXXXXX",
@@ -158,4 +178,5 @@ int main()
         cout << "Solvable!" << endl;
     else
         cout << "Out of luck!" << endl;
-}
+}*/
+
