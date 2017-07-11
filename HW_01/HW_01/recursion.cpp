@@ -89,7 +89,7 @@ bool sumCombination(const int a[], int size, int target)
         return true;
     if (size == 1 && n != target)
         return false;
-    return (sumCombination(a++,size-1,target) || sumCombination(a++, size-1, target - n));
+    return (sumCombination(a+1,size-1,target) || sumCombination(a+1, size-1, target - n));
         //return true;
     
 }
@@ -143,9 +143,9 @@ bool pathExists(string maze[], int nRows, int nCols, int sr, int sc, int er, int
 
 int main() {
     
-    int a[] = {2,8,6,4};
+    int a[] = {2,8,6,4,100,99,98,3,6,7,8,9,10};
     
-    cout << sumCombination(a,4,12) << endl;
+    cout << sumCombination(a,13,11) << endl;
     
     
     
